@@ -1,7 +1,7 @@
 import WalletBalance from './WalletBalance';
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 
-import { ethers } from 'ethers';
+import {ethers} from 'ethers';
 import FireUp from '../artifacts/contracts/myNFT.sol/FiredUp.json';
 
 const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
@@ -48,10 +48,10 @@ function Home() {
 
 
     function NFTImage({tokenId, getCount}) {
-        const contentId = 'QmcXVEueYHAyoSTZWAMienZjzBWd4a1VPyFsZYpMxDRGQN';
-        const metadataURI = `${contentId}/${tokenId}.json`;
-        const imageURI = `https://gateway.pinata.cloud/ipfs/${contentId}/${tokenId}.png`;
-//   const imageURI = `img/${tokenId}.png`;
+        // const contentId = 'QmcXVEueYHAyoSTZWAMienZjzBWd4a1VPyFsZYpMxDRGQN';
+        const metadataURI = `${tokenId}.json`;
+        // const imageURI = `https://gateway.pinata.cloud/ipfs/${contentId}`;
+        const imageURI = `img/${tokenId}.jpg`;
 
         const [isMinted, setIsMinted] = useState(false);
         useEffect(() => {
@@ -67,6 +67,7 @@ function Home() {
         const mintToken = async () => {
             const connection = contract.connect(signer);
             const addr = connection.address;
+
             const result = await contract.PayToMint(addr, metadataURI, {
                 value: ethers.utils.parseEther('0.05'),
             });
@@ -83,7 +84,7 @@ function Home() {
 
         return (
             <div className="card" style={{width: '18rem'}}>
-                <img className="card-img-top" src={isMinted ? imageURI : 'img/placeholder.png'}></img>
+                <img className="card-img-top" src={isMinted ? `img/${tokenId+1}.jpg` : 'img/placeholder.png'}></img>
                 <div className="card-body">
                     <h5 className="card-title">ID #{tokenId}</h5>
                     {!isMinted ? (
@@ -100,4 +101,5 @@ function Home() {
         );
     }
 }
+
 export default Home;

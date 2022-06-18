@@ -13,6 +13,6 @@ describe("myNFT", function () {
         let balance = await firedUp.balanceOf(recipient);
         expect(balance).to.equal(0)
 
-        const newlyMintedToken = await firedUp.PayToMint(recipient, metadataURI, {value: ethers.utils.parseEther("0.06")})
+        const newlyMintedToken = await firedUp.PayToMint(recipient, metadataURI, {value: ethers.utils.parseEther("0.05")})
     })
 })
